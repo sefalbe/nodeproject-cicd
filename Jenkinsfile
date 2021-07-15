@@ -3,19 +3,25 @@ pipeline {
     //    registry = "sefalbe/nginx-react-demo"
     //    registryCredential = 'dockerhub'
     // }
-     agent {
-        docker { image 'node:10.19.0' }
-    }
+    agent any
     stages {
         stage('Installing and analyzing') {
             stages {
-                stage ('Install') {
-                    steps {
-                        script {
-                            sh 'npm i'
-                        }
-                    }
+              stage('preparing docker') {
+                agent {
+                    docker { 
+                      image 'node:10.19.0'
+                      args '--entrypoint=\'\' -v ${PWD}:/usr/src/app -w /usr/src/app'
+                      reuseNode true
+                  }
                 }
+              stage ('Install') {
+                  steps {
+                      script {
+                          sh 'npm i'
+                      }
+                   }
+              }
                 // stage ('Analyzing with SonarQube') {
                 //     steps {
                 //         sh 'npm run build'

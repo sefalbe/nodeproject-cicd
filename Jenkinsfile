@@ -1,8 +1,8 @@
 pipeline {
-    environment {
+    // environment {
     //    registry = "sefalbe/nginx-react-demo"
     //    registryCredential = 'dockerhub'
-    }
+    // }
     agent {
         label any
     }

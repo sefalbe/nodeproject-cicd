@@ -1,7 +1,7 @@
 pipeline {
     agent any
     stages {
-        stage('preparing docker') {
+        stage('preparing docker / CI') {
             agent {
                 docker { 
                     image 'node:10.19.0'
@@ -17,14 +17,14 @@ pipeline {
                         }
                     }
                 }
-                // stage ('Analyzing with SonarQube') {
-                //     steps {
-                //         sh 'npm run build'
-                //     }
-                // }
+                stage ('Analyzing with SonarQube') {
+                    steps {
+                        sh 'echo "Running SonarQube..."'
+                    }
+                }
             }
         }
-        stage('Deploy for feature/jenkins-cicd') {
+        stage('Deploy for feature/jenkins-cicd / CD') {
             when {
                 branch 'feature/jenkins-cicd'
             }
@@ -32,7 +32,21 @@ pipeline {
                 stage('Deploying in server') {
                     steps{
                         script {
-                            sh 'echo "Deploying in server..."'
+                            sh 'echo "Deploying in server..."'                            
+                        }
+                    }
+                }                
+            }
+        }
+        stage('Deploy for development / CD') {
+            when {
+                branch 'dev'
+            }
+            stages {
+                stage('Deploying in dev server') {
+                    steps{
+                        script {
+                            sh 'echo "Deploying in dev server..."'                            
                         }
                     }
                 }                

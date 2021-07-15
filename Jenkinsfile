@@ -7,7 +7,7 @@ pipeline {
         docker { image 'node:10.19.0' }
     }
     stages {
-        stage('Installing and analysing') {
+        stage('Installing and analyzing') {
             stages {
                 stage ('Install') {
                     steps {

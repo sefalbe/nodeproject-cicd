@@ -4,7 +4,7 @@ pipeline {
     //    registryCredential = 'dockerhub'
     // }
     agent {
-        label any
+        label "master"
     }
     stages {
         stage('preparing docker') {

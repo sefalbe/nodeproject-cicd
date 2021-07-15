@@ -1,13 +1,14 @@
 pipeline {
-     agent {
-        docker { 
-            image 'node:10.19.0'
-            args '--entrypoint=\'\' -v ${PWD}:/usr/src/app -w /usr/src/app'
-            reuseNode true
-        }
-    }
+    agent any
     stages {
-        stage('Installing') {
+        stage('preparing docker') {
+            agent {
+                docker { 
+                    image 'node:10.19.0'
+                    args '--entrypoint=\'\' -v ${PWD}:/usr/src/app -w /usr/src/app'
+                    reuseNode true
+                }
+            }
             stages {
                 stage ('Install') {
                     steps {

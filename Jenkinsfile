@@ -3,10 +3,8 @@ pipeline {
     //    registry = "sefalbe/nginx-react-demo"
     //    registryCredential = 'dockerhub'
     // }
-     agent {
-      "master"
+     agent "master"
         // docker { image 'node:10.19.0' }
-    }
     stages {
         stage('Installing and analyzing') {
             stages {

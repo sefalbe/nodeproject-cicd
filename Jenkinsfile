@@ -13,7 +13,14 @@ pipeline {
                 stage ('Install') {
                     steps {
                         script {
-                            sh 'npm i'
+                            sh '''
+                              uname -a
+                              pwd
+                              whoami
+                              ls -la
+                              npm i
+                              ls -la
+                            '''
                         }
                     }
                 }
